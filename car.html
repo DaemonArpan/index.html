@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyDrive - The Future of Transportation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #fff;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #00d4ff;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(0, 212, 255, 0.1) 50%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(123, 47, 247, 0.1) 50%, transparent 52%);
+            background-size: 100px 100px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .btn-primary {
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(0, 212, 255, 0.5);
+        }
+
+        .btn-secondary {
+            padding: 1.2rem 3rem;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: -80px auto 0;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .models {
+            padding: 150px 2rem 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .model-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.5s;
+            position: relative;
+        }
+
+        .model-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+        }
+
+        .model-image {
+            height: 280px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7b2ff7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .model-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(-25%, -25%); }
+            50% { transform: translate(25%, 25%); }
+        }
+
+        .model-info {
+            padding: 2.5rem;
+        }
+
+        .model-name {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .model-tagline {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1.5rem;
+        }
+
+        .model-specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .spec {
+            background: rgba(0, 212, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .spec-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+
+        .model-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #7b2ff7;
+            margin: 1.5rem 0;
+        }
+
+        .features {
+            padding: 100px 2rem;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+
+        .features-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .feature-card:nth-child(2) .feature-icon { animation-delay: 0.5s; }
+        .feature-card:nth-child(3) .feature-icon { animation-delay: 1s; }
+        .feature-card:nth-child(4) .feature-icon { animation-delay: 1.5s; }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .feature-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">✈️ SkyDrive</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#models">Models</a></li>
+                <li><a href="#features">Technology</a></li>
+                <li><a href="#reserve">Reserve</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>The Sky Is No Longer The Limit</h1>
+            <p>Experience the freedom of vertical takeoff. The future of urban mobility is here.</p>
+            <div class="cta-buttons">
+                <a href="#reserve" class="btn-primary">Reserve Your SkyDrive</a>
+                <a href="#models" class="btn-secondary">Explore Models</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">300</div>
+            <div class="stat-label">Miles Range</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">180</div>
+            <div class="stat-label">MPH Top Speed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Passengers</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">45s</div>
+            <div class="stat-label">0-60 Flight Time</div>
+        </div>
+    </div>
+
+    <section class="models" id="models">
+        <h2 class="section-title">Choose Your Sky</h2>
+        <p class="section-subtitle">Revolutionary vehicles designed for the modern era</p>
+        
+        <div class="models-grid">
+            <div class="model-card">
+                <div class="model-image">🚁</div>
+                <div class="model-info">
+                    <h3 class="model-name">SkyDrive One</h3>
+                    <p class="model-tagline">Personal Urban Mobility</p>
+                    <div class="model-specs">
+                        <div class="spec">
+                            <div class="spec-label">Range</div>
+                            <div class="spec-value">150 mi</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-label">Speed</div>
+                            <div class="spec-value">120 mph</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-label">Seats</div>
+                            <div class="spec-value">2</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-label">VTOL</div>
+                            <div class="spec-value">Yes</div>
+                        </div>
+                    </div>
+                    <div class="model-price">$299,000</div>
+                    <a href="#reserve" class="btn-primary">Reserve Now</a>
+                </div>
+            </div>
+
+            <div class="model-card">
+                <div class="model-image">✈️</div>
+                <div class="model-info">
+                    <h3 class="model-name">SkyDrive Elite</h3>
+                    <p class="model-tagline">Luxury Air Travel</p>
+                    <div class="model-specs">
+                        <div class="spec">
+                            <div class="spec-label">Range</div>
+                            <div class="spec-value">300 mi</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-label">Speed</div>
+                            <div class="spec-value">180 mph</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-label">Seats</div>
+                            <div class="spec-value">4</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-label">VTOL</div>
+                            <div class="spec-value">Yes</div>
+                        </div>
+                    </div>
+                    <div class="model-price">$549,000</div>
+                    <a href="#reserve" class="btn-primary">Reserve Now</a>
+                </div>
+            </div>
+
+            <div class="model-card">
+                <div class="model-image">🛸</div>
+                <div class="model-info">
+                    <h3 class="model-name">SkyDrive X</h3>
+                    <p class="model-tagline">Ultimate Performance</p>
+                    <div class="model-specs">
+                        <div class="spec">
+                            <div class="spec-label">Range</div>
+                            <div class="spec-value">400 mi</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-label">Speed</div>
+                            <div class="spec-value">250 mph</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-label">Seats</div>
+                            <div class="spec-value">4</div>
+                        </div>
+                        <div class="spec">
+                            <div class="spec-label">VTOL</div>
+                            <div class="spec-value">Yes</div>
+                        </div>
+                    </div>
+                    <div class="model-price">$899,000</div>
+                    <a href="#reserve" class="btn-primary">Reserve Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <h2 class="section-title">Advanced Technology</h2>
+        <p class="section-subtitle">Innovation that takes you higher</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Electric Propulsion</h3>
+                <p class="feature-description">Zero-emission electric motors with rapid charging capability and whisper-quiet operation</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">AI Autopilot</h3>
+                <p class="feature-description">Advanced autonomous flight systems with collision avoidance and weather monitoring</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3 class="feature-title">Safety First</h3>
+                <p class="feature-description">Multiple redundant systems, ballistic parachute, and real-time health monitoring</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📡</div>
+                <h3 class="feature-title">Smart Connectivity</h3>
+                <p class="feature-description">5G integrated navigation, real-time traffic updates, and seamless device integration</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="reserve">
+        <h2 class="section-title" style="margin-bottom: 1rem;">Ready to Fly?</h2>
+        <p style="color: rgba(255,255,255,0.8); margin-bottom: 2rem; font-size: 1.2rem;">Reserve your SkyDrive today with a $5,000 deposit</p>
+        <a href="#" class="btn-primary">Reserve Now</a>
+        <p style="margin-top: 3rem;">&copy; 2026 SkyDrive Inc. All rights reserved.</p>
+        <p>Contact: future@skydrive.com | 1-888-SKY-DRIVE</p>
+    </footer>
+</body>
+</html>
